@@ -1,6 +1,6 @@
 import * as helpers from './helpers';
 
-export class Lecture {
+export default class Lecture {
     constructor() {
         this.contentBox = document.querySelector('.main') //TODO Finna hentugt nafn á þetta, þarf að vera í samræmi við HTMl
         this.URL = 'lectures.json';

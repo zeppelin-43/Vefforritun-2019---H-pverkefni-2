@@ -13,20 +13,19 @@ export default class List {
 
   load() {
     empty(this.container);
-    empty('asdad');
-    //TODO
+    this.eventlistenerOnButton();
+
+
     // Tékka hvað á að birta og hvernig, hvaða filterar
   }
 
-  displayLectures() {
-    //TODO
-  }
+
 
 
   /**
    * Fall sem sækir fyrirlestrana. Notar lectureReader.js
    */
-  fetchLectures() {
+  update() {
     fetch(url)
       .then((response) => {
         if (response.ok) {
@@ -35,8 +34,9 @@ export default class List {
         throw new Error('Villa við að sækja gögn');
       })
       .then((data) => {
-        const lectures = data.lectures;
-
+        let lectures = data.lectures;
+        lectures = this.filterLectures(lectures);
+        this.displayLectures(lectures);
       })
       .catch((error) => {
         //displayError('Villa!');
@@ -45,24 +45,26 @@ export default class List {
   }
 
   active(e) {
-    console.log(e);
-    e.target.classList.toggle('item--done');
+    e.target.classList.toggle('button-active');
+
   }
 
-  eventlistenerOnButton() {
-    for (let i = 0; i < this.filters.length; i += 1) {
-      this.filters[i].addEventListener('click', this.active);
-      console.log("stoff2");
-
-
+  eventlistenerOnButton() { 
+    for (let button of filters.querySelectorAll('.filters__button')) { /* eslint-disable-line */
+      button.addEventListener('click', this.active);
     }
   }
 
-  filterSelection(c) {
-    console.log(c);
+  filterLectures(lectures) {
+    for (let button of filters.querySelectorAll('.filters__button')) { /* eslint-disable-line */
+      button.addEventListener('click', this.active);
+    }
+
   }
 
+  displayLectures(lectures){
 
+  }
 
 
   //TODO Föll fyrir filtera
