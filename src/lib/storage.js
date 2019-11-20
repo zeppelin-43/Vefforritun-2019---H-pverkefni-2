@@ -19,7 +19,7 @@ export function load() {
 export function save(slug) {
     const finished = load();
 
-    //TODO tékka hvort það sé þegar búið að vista slug í storage
+    // Tékka hvort fyrirlesturinn sé nú þegar búinn
     if(!finished.includes(slug)) {
         finished.push(slug);
         localStorage.setItem(KEY, JSON.stringify(finished));

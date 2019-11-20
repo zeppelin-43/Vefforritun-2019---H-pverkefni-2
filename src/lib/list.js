@@ -45,7 +45,7 @@ export default class List {
 
 
 
-  //TODO Fall til að merkja fyrirlestur sem lokið
+  
   
   //TODO Föll fyrir filtera
 

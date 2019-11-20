@@ -6,10 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (isLecturePage) {
     const lecture = new lecture();
-    lecture.loa();
+    lecture.load();
 
   } else {
     const list = new List();
+    list.init();
     list.load();
   }
 });
