@@ -12,26 +12,26 @@ export default class Lecture {
      */
     getLecture() {
         fetch(url)
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Villa við að sækja gögn');
-        })
-        .then((data) => {
-            const lectures = data.lectures;
-            lectures.forEach(o => {
-                if(o.slug == this.SLUG) {
-                    return o;
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
                 }
+                throw new Error('Villa við að sækja gögn');
+            })
+            .then((data) => {
+                const lectures = data.lectures;
+                lectures.forEach(o => {
+                    if (o.slug == this.SLUG) {
+                        return o;
+                    }
+                });
+                throw new Error('Rangt slug');
+
+            })
+            .catch((error) => {
+                displayError('Villa!');
+                console.error(error); /* eslint-disable-line */
             });
-            throw new Error('Rangt slug');
-            
-        })
-        .catch((error) => {
-            displayError('Villa!');
-            console.error(error); /* eslint-disable-line */
-        });
     }
 
     displayLecture(lecture) {
@@ -42,7 +42,7 @@ export default class Lecture {
         content.forEach(object => {
             const type = object.type;
             //TODO setja class name á allt
-            switch(type) {
+            switch (type) {
                 case 'youtube':
                     const videoFrame = helpers.el('iframe')
                     videoFrame.setAttribute('src', object.data); // data er urlið
@@ -51,8 +51,8 @@ export default class Lecture {
                     break;
                 case 'text':
                     const texts = object.data.split('\n');
-                    const textElements = texts.map((x) => {return helpers.el('p', x);}); // Vantar að bæta við klasanöfnum
-                    textElements.forEach((t)=> {
+                    const textElements = texts.map((x) => { return helpers.el('p', x); }); // Vantar að bæta við klasanöfnum
+                    textElements.forEach((t) => {
                         children.appendChild(t);
                     });
                     break;
@@ -83,7 +83,7 @@ export default class Lecture {
                     const pre = helpers.el('pre', object.data);
                     const code = helpers.el('code', pre);
                     children.appendChild(code);
-                    break;    
+                    break;
                 default:
                     //TODO
                     console.log('TODO: Default case')

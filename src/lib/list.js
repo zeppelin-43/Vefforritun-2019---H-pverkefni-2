@@ -1,4 +1,5 @@
 import { empty } from './helpers';
+import * as helpers from './helpers';
 
 export default class List {
   constructor() {
@@ -14,19 +15,16 @@ export default class List {
   load() {
     empty(this.container);
     this.eventlistenerOnButton();
-
-
+    this.update();
     // Tékka hvað á að birta og hvernig, hvaða filterar
   }
 
 
-
-
   /**
-   * Fall sem sækir fyrirlestrana. Notar lectureReader.js
+   * Fall sem sækir fyrirlestrana.
    */
   update() {
-    fetch(url)
+    fetch(this.URL)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -46,31 +44,52 @@ export default class List {
 
   active(e) {
     e.target.classList.toggle('button-active');
-
+    empty(this.container);
+    this.update();
   }
 
-  eventlistenerOnButton() { 
-    for (let button of filters.querySelectorAll('.filters__button')) { /* eslint-disable-line */
-      button.addEventListener('click', this.active);
+  eventlistenerOnButton() {
+    for (const button of filters.querySelectorAll('.filters__button')) { /* eslint-disable-line */
+      button.addEventListener('click', this.active.bind(this));
     }
   }
 
   filterLectures(lectures) {
-    for (let button of filters.querySelectorAll('.filters__button')) { /* eslint-disable-line */
-      button.addEventListener('click', this.active);
+    const filteredLectures = [];
+    for (const button of filters.querySelectorAll('.filters__button')) { /* eslint-disable-line */
+      if (button.classList.contains('button-active')) {
+        for (const item of lectures) { /* eslint-disable-line */
+          if (item.category === button.id) {
+            filteredLectures.push(item);
+          }
+        }
+      }
+    }
+    if (filteredLectures.length < 1) {
+      return lectures;
+    }
+    return filteredLectures;
+  }
+
+
+  displayLectures(lectures) {
+    for (const lecture of lectures) { /* eslint-disable-line */
+      const title = helpers.el('h2');
+      title.innerText = lecture.title;
+
+      const category = helpers.el('h3');
+      category.innerText = lecture.category;
+
+
+      const img = helpers.el('img');
+      img.src = lecture.thumbnail;
+
+
+      const div = helpers.el('div', img, title, category);
+      this.container.appendChild(div);
     }
 
   }
-
-  displayLectures(lectures){
-
-  }
-
-
-  //TODO Föll fyrir filtera
-
-
-
 
 
 }
