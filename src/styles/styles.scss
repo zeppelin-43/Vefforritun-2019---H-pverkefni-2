@@ -24,4 +24,6 @@ img { /* stylelint-disable-line */
   max-width: 100%;
 }
 
-// TODO import
+@import "header";
+@import "filter";
+@import "lectures";
