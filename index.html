@@ -2,9 +2,32 @@
 <html lang="is">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hópverkefni 2</title>
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i|Roboto+Mono:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="grid.css">
+  <link rel="stylesheet" href="./dist/styles.css">
 </head>
 <body>
-
+  <header class="header">
+    <div class="header__content">
+      <h1 class="header__title">Vefforritun</h1>
+      <h2 class="header__undertitle">Fyrirlestrar</h2>
+    </div>
+  </header>
+  <main>
+    <ul class="filters">
+      <li><button lecture-category="html" class="filter--html">HTML</button></li>
+      <li><button lecture-category="css" class="filter--css">CSS</button></li>
+      <li><button lecture-category="javascript" class="filter--js">JavaScript</button></li>
+    </ul>
+    <div class=lectures__list">
+      <div class=lectures__list__row">
+        <div class="lecture__card">
+          
+        </div>
+      </div>
+    </div>
+  </main>
 </body>
 </html>
