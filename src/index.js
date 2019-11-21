@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     console.log('indexpage');
     const list = new List();
-    list.init();
     list.load();
   }
 });
