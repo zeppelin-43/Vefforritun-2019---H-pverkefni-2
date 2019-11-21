@@ -1,0 +1,42 @@
+@import "config";
+
+.filter {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    list-style-type: none;
+
+    &__button {
+        padding: $gutter*0.5 $gutter;
+
+        margin-right: $gutter;
+        margin-left: $gutter;
+        background-color: $color-4;
+
+        font-family: $font-heading;
+        font-size: 1.5rem;
+        font-weight: bold;
+
+        border-radius: 16px;
+        
+        cursor: pointer;
+
+        transition: $transition;
+
+        &:hover {
+            background-color: $color-2;
+        }
+    }
+
+    &--active {
+        background-color: $color-5;
+
+        &:hover {
+            background-color: $color-6;
+        }
+    }
+}
