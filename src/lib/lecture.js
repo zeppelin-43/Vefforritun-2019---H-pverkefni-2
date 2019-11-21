@@ -1,6 +1,6 @@
 import * as helpers from './helpers';
 
-export class Lecture {
+export default class Lecture {
     constructor() {
         this.contentBox = document.querySelector('.main') //TODO Finna hentugt nafn á þetta, þarf að vera í samræmi við HTMl
         this.URL = 'lectures.json';
@@ -11,7 +11,7 @@ export class Lecture {
      * Finnur réttan fyrirlestur miðað við SLUG
      */
     getLecture() {
-        fetch(url)
+        fetch(this.URL)
         .then((response) => {
             if (response.ok) {
                 return response.json();
@@ -19,24 +19,35 @@ export class Lecture {
             throw new Error('Villa við að sækja gögn');
         })
         .then((data) => {
+            
             const lectures = data.lectures;
-            lectures.forEach(o => {
-                if(o.slug == this.SLUG) {
-                    return o;
+            var lecture = null;
+            for(let i = 0; i<lectures.length; i++) {
+                if(lectures[i].slug === this.SLUG) {
+                    console.log('Found the right slug ' + lectures[i].slug);
+                    // console.log(lectures[i]);
+                    lecture= lectures[i];
+                    // return o;
                 }
-            });
+            }
+            
+            if(lecture) {
+               this.displayLecture(lecture);
+            }
+            
             throw new Error('Rangt slug');
             
         })
         .catch((error) => {
-            displayError('Villa!');
+            // displayError('Villa!');
             console.error(error); /* eslint-disable-line */
         });
     }
 
     displayLecture(lecture) {
         //TODO 
-        helpers.empty();
+        console.log(lecture);
+        helpers.empty(this.contentBox);
         const content = lecture.content; // Sækja contentið úr lecture
         const children = helpers.el('div'); // Börn aðal divsins
         content.forEach(object => {
@@ -57,7 +68,7 @@ export class Lecture {
                     });
                     break;
                 case 'quote':
-                    const blockQuote = helpers.el('blockquote ', object.data)
+                    const blockQuote = helpers.el('blockquote', object.data)
                     children.appendChild(blockQuote);
                     break;
                 case 'image':
@@ -72,11 +83,14 @@ export class Lecture {
                     children.appendChild(h2);
                     break;
                 case 'list':
-                    const listElements = [];
+                    // debugger;
+                    const ul = helpers.el('ul');
+                    // const listElements = [];
                     object.data.forEach((item) => {
-                        listElements.push(helpers.el('li', item));
+                        // listElements.push(helpers.el('li', item));
+                        ul.appendChild(helpers.el('li', item));
                     });
-                    const ul = helpers.el('ul', listElements);
+                    // const ul = helpers.el('ul', listElements);
                     children.appendChild(ul);
                     break;
                 case 'code':
@@ -103,9 +117,11 @@ export class Lecture {
         // Sækir viðeigandi gögn úr .json skránni
         // Kallar á fleiri föll sem sjá um að birta
         this.SLUG = (new URLSearchParams(window.location.search)).get('slug'); // Sækja sluggið
-        const lecture = this.getLecture(); // Sækja fyrirlestur
-        displayLecture(lecture);
-
+        console.log(this.SLUG);
+        this.getLecture();
+        // debugger;
+       
+    
     }
 
     //TODO Fall til að merkja fyrirlestur sem lokið
