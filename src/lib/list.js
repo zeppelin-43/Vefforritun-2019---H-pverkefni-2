@@ -46,6 +46,7 @@ export default class List {
 
   active(e) {
     e.target.classList.toggle('button-active');
+    this.update();
 
   }
 

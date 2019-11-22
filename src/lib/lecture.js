@@ -48,6 +48,8 @@ export default class Lecture {
         //TODO 
         console.log(lecture);
         helpers.empty(this.contentBox);
+        // TODO búa til header
+
         const content = lecture.content; // Sækja contentið úr lecture
         const children = helpers.el('div'); // Börn aðal divsins
         content.forEach(object => {
@@ -83,7 +85,7 @@ export default class Lecture {
                     children.appendChild(h2);
                     break;
                 case 'list':
-                    // debugger;
+                    // debugg   er;
                     const ul = helpers.el('ul');
                     // const listElements = [];
                     object.data.forEach((item) => {
@@ -106,6 +108,7 @@ export default class Lecture {
 
         this.contentBox.appendChild(children);
 
+        // TODO búa til footer/eða það sem er neðst
     }
 
 

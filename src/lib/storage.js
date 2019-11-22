@@ -26,3 +26,10 @@ export function save(slug) {
     }
 
 }
+
+/**
+ * Tékkar hvort fyrirlestur sé búinn
+ */
+export function isFinished(slug) {
+    return load().includes(slug);
+}
