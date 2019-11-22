@@ -55,7 +55,7 @@ export default class Lecture {
         content.forEach(object => {
             const type = object.type;
             //TODO setja class name á allt
-            switch(type) {
+            switch (type) {
                 case 'youtube':
                     const videoFrame = helpers.el('iframe')
                     videoFrame.setAttribute('src', object.data); // data er urlið
@@ -64,8 +64,8 @@ export default class Lecture {
                     break;
                 case 'text':
                     const texts = object.data.split('\n');
-                    const textElements = texts.map((x) => {return helpers.el('p', x);}); // Vantar að bæta við klasanöfnum
-                    textElements.forEach((t)=> {
+                    const textElements = texts.map((x) => { return helpers.el('p', x); }); // Vantar að bæta við klasanöfnum
+                    textElements.forEach((t) => {
                         children.appendChild(t);
                     });
                     break;
@@ -99,7 +99,7 @@ export default class Lecture {
                     const pre = helpers.el('pre', object.data);
                     const code = helpers.el('code', pre);
                     children.appendChild(code);
-                    break;    
+                    break;
                 default:
                     //TODO
                     console.log('TODO: Default case')
