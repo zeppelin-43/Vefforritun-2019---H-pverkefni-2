@@ -2,33 +2,77 @@
 <html lang="is">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hópverkefni 2</title>
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i|Roboto+Mono:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="grid.css">
+  <link rel="stylesheet" href="./dist/styles.css">
 </head>
 <body>
-<main>
-  <a href="fyrirlestur.html?slug=html-sagan">Click me</a>
-
-
-  <div id="filters">
-    <button class="filters__button" id="html">HTML</button>
-    <button class="filters__button" id="css">CSS</button>
-    <button class="filters__button" id="javascript">JavaScript</button>
-
-  </div>
-
-
-  <div class="list">
-
-  </div>
-
-
-  </div>
-
-  <div class="list">
-
-  </div>
-
-</main>
-<script src="./dist/bundle.js"></script>
+  <header class="header header--all header__overlay">
+    <div class="header__content">
+      <h1 class="header__title">Vefforritun</h1>
+      <h2 class="header__undertitle">Fyrirlestrar</h2>
+    </div>
+  </header>
+  <main>
+    <ul class="filter">
+      <li><button lecture-category="html" class="filter__button filter--html filter--active">HTML</button></li>
+      <li><button lecture-category="css" class="filter__button filter--css">CSS</button></li>
+      <li><button lecture-category="javascript" class="filter__button filter--js">JavaScript</button></li>
+    </ul>
+    <div class="lectures">
+      <div class="lectures__row">
+        <div class="lectures__col">
+          <div class="lectures__card">
+            <div class="lectures__card__border">
+              <h1 class="lectures__card__category lectures__card__text">HTML</h1>
+              <h2 class="lectures__card__title lectures__card__text">Sagan</h2>
+              <div class="lectures__card__done lectures__card__check">
+                  
+              </div>
+            </div>
+            <img class="lectures__card__image" src="./img/thumb1.jpg">
+          </div>
+        </div>
+        <div class="lectures__col">
+          <div class="lectures__card">
+            <div class="lectures__card__border">
+              <h1 class="lectures__card__category lectures__card__text">JavaScript</h1>
+              <h2 class="lectures__card__title lectures__card__text">Málfræði</h2>
+              <div class="lectures__card__done">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lectures__col">
+            <div class="lectures__card">
+              <div class="lectures__card__border">
+                <h1 class="lectures__card__category lectures__card__text">JavaScript</h1>
+                <h2 class="lectures__card__title lectures__card__text">Málfræði</h2>
+                <div class="lectures__card__done">
+                  
+                </div>
+              </div>
+              <img class="lectures__card__image" src="./img/thumb3.jpg">
+            </div>
+          </div>
+        <div class="lectures__col">
+            <div class="lectures__card">
+              <div class="lectures__card__border">
+                <h1 class="lectures__card__category lectures__card__text">JavaScript</h1>
+                <h2 class="lectures__card__title lectures__card__text">Málfræði</h2>
+                <div class="lectures__card__done">
+                  
+                </div>
+              </div>
+              <img class="lectures__card__image" src="./img/thumb4.jpg">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </body>
 </html>

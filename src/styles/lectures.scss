@@ -1,0 +1,96 @@
+@import "config";
+
+.lectures {
+
+    max-width: $max-width;
+    margin: 0 auto;
+    
+    padding-top: $gutter*2;
+    
+
+    @media (max-width: $max-width - 1) {
+        padding-right: $gutter;
+        padding-left: $gutter;
+    }
+
+    &__row {
+        @include row;
+        margin-bottom: $gutter * 2;
+        
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__col {
+        @include columns(12);
+
+        margin-bottom: 2*$gutter;
+
+        @media (min-width: 800px) {
+            @include columns(4);
+        }
+    }
+
+    &__card {
+        display: flex;
+        height: 100%;
+        color: inherit;
+
+        flex-direction: column-reverse;
+        justify-content: space-between;
+
+        background-color: $color-4;
+
+        cursor: pointer;
+
+        transition: $transition;
+
+        &:hover {
+            background-color: $color-3;
+        }
+
+        &__border {
+            padding: $gutter*0.5;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        &__category {
+            position: relative;
+            display: block;
+            z-index: 1;
+            font-weight: normal;
+
+            font-family: $font-heading;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        &__title {
+            position: relative;
+            z-index: 1;
+
+            font-family: $font-heading;
+            font-size: 2rem;
+        }
+
+        &__text {
+            flex: 1;
+        }
+
+        &__done {
+            color: $color-5;
+            font-size: 3rem;
+        }
+
+        &__image {
+            display: flex;
+            align-items: center;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
