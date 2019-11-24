@@ -1,0 +1,114 @@
+@import "config";
+
+.lecture {
+    max-width: $max-width;
+    margin: 0 auto;
+
+    @media (max-width: $max-width - 1) {
+        padding-right: $gutter;
+        padding-left: $gutter;
+    }
+
+    &__row {
+        @include row;
+        margin-bottom: $gutter * 2;
+
+        flex-wrap: wrap;
+    }
+
+    &__col {
+        @include columns(12);
+
+        margin-bottom: 2*$gutter;
+
+        @media (min-width: 800px) {
+            @include columns(8);
+            @include offset-left(2);
+        }
+    }
+
+    &__heading {
+        font-family: $font-heading;
+        margin-bottom: $gutter;
+    }
+
+    &__youtube {
+        position: relative;
+        max-width: 100%;
+        padding-bottom: 56.25%;
+        overflow: hidden;
+        margin-bottom: 2*$gutter;
+        
+        &__iframe {
+            position: absolute;
+  
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%; 
+        }
+    }
+
+    &__text {
+        margin-bottom: 2*$gutter;
+
+        &__part {
+            margin-bottom: $gutter;
+            line-height: 1.8;
+        }
+
+    }
+
+    &__image {
+        margin-bottom: 2*$gutter;
+
+        &__caption {
+            font-style: italic;
+        }
+    }
+
+    &__quote {
+        background-color: $color-4;
+        padding: $gutter;
+        margin-bottom: 3*$gutter;
+        margin-right: -$gutter;
+        margin-left: -$gutter;
+
+        &__attribute {
+            font-style: italic;
+        }
+
+        &__text {
+            margin-bottom: $gutter;
+        }
+    }
+
+    &__code {
+        font-family: $font-heading;
+        margin-bottom: 2*$gutter;
+    }
+
+    &__list {
+        margin-bottom: 2*$gutter;
+
+        &__li {
+            margin-bottom: $gutter;
+        }
+    }
+
+    &__footer {
+        margin-top: 3*$gutter;
+
+        &__finish, &__back {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+    
+            font-family: $font-heading;
+            text-decoration: none;
+            color: $color-1;
+    
+            margin-bottom: 3*$gutter;
+        }
+    }
+}
