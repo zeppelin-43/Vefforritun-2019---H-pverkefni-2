@@ -47,31 +47,35 @@ export default class Lecture {
     }
 
     
-    createHeader(header, lecture) {
+    createHeader(lecture) {
+        const header = helpers.el('header');
+        header.className = 'header header__overlay';
         const content = helpers.el('div');
         content.className = 'header__content';
-        const category = helpers.el('h1', lecture.category);
-        category.className = 'header__title';
-        const  title = helpers.el('h2', lecture.title);
-        title.className = 'header__undertitle';
+        const title = helpers.el('h1', lecture.category);
+        title.className = 'header__title';
+        const undertitle = helpers.el('h2', lecture.title);
+        undertitle.className = 'header__undertitle';
 
-        content.appendChild(category);
         content.appendChild(title);
+        content.appendChild(undertitle);
         header.appendChild(content);
+        if(lecture.image) {
+            header.style.backgroundImage = `url(${lecture.image})`;
+        }
+        this.body.appendChild(header);
     }
-    displayLecture(lecture) {
-        //TODO 
-        console.log(lecture);
-        const col = this.body.querySelector('.lecture__col');
-        const header = this.body.querySelector('.header.header__overlay');
-        helpers.empty(col);
-        helpers.empty(header);
-        // TODO búa til header
+
+    createMain(lecture) {
+        const main = helpers.el('main');
+        const row = helpers.el('div');
+        row.className = 'lecture__row';
+        const col = helpers.el('div');
+        col.className = 'lecture__col';
+        row.appendChild(col);
+        main.appendChild(row);
 
         const content = lecture.content; // Sækja contentið úr lecture
-
-        this.createHeader(header, lecture);
-
         content.forEach(object => {
             const type = object.type;
             //TODO setja class name á allt
@@ -159,20 +163,23 @@ export default class Lecture {
             }
         });
 
-        //this.body.appendChild(col);
-
-
-        //this.createFooter(lecture);
-        // TODO búa til footer/eða það sem er neðst
+        this.body.appendChild(main);
     }
-
 
     createFooter(lecture) {
         const footer = helpers.el('footer');
         footer.className = 'lecture__footer';
-        const finish = helpers.el('a', 'Klára fyrirlestur');
+        const slug = lecture.slug;
+        const finish = helpers.el('button');
+        if(storage.load().includes(slug)) {
+            finish.innerHTML = '✓ Klára fyrirlestur'
+        }
+        else {
+            finish.innerHTML = 'Klára fyrirlestur'
+        }
+
         finish.className = 'lecture__footer__finish';
-        finish.setAttribute('href', '/');
+        finish.addEventListener('click', this.finishLecture);
         const back = helpers.el('a', 'Til baka');
         back.className = 'lecture__footer__back';
         back.setAttribute('href', '/');
@@ -180,6 +187,17 @@ export default class Lecture {
         footer.appendChild(back);
         this.body.appendChild(footer);
         }
+
+
+
+    displayLecture(lecture) {
+        helpers.empty(this.body);
+
+        this.createHeader(lecture);
+        this.createMain(lecture);
+        this.createFooter(lecture);
+
+    }
 
 
         finishLecture(e) {
@@ -204,12 +222,6 @@ export default class Lecture {
         // Kallar á fleiri föll sem sjá um að birta
         const slug = (new URLSearchParams(window.location.search)).get('slug'); // Sækja sluggið
         console.log(slug);
-
-        const finish = document.querySelector('.lecture__footer__finish');
-        finish.addEventListener('click', this.finishLecture);
-        if(storage.load().includes(slug)) {
-            finish.innerHTML='✓ Klára fyrirlestur';
-        }
         this.getLecture(slug);
         // debugger;
        
