@@ -3,7 +3,7 @@ import * as storage from './storage';
 
 export default class Lecture {
     constructor() {
-        this.body = document.querySelector('.lecture-page');
+        this.body = document.querySelector('.lecture');
         this.URL = 'lectures.json';
     }
 
@@ -117,18 +117,13 @@ export default class Lecture {
                     col.appendChild(lectureQuote);
                     break;
                 case 'image':
-                    // const img = helpers.el('img');
-                    // img.setAttribute('src', object.data);
-                    // const figcaption = helpers.el('figcaption', object.caption);
-                    // const figure = helpers.el('figure', img, figcaption);
-                    // children.appendChild(figure);
-
                     const lectureImage = helpers.el('div');
                     lectureImage.className = 'lecture__image';
                     const img = helpers.el('img');
                     const caption = helpers.el('p');
                     caption.className = 'lecture__image__caption';
 
+                    img.setAttribute('src', object.data);
                     lectureImage.appendChild(img);
                     lectureImage.appendChild(caption);
                     col.appendChild(lectureImage);

@@ -3,7 +3,7 @@ import Lecture from './lib/lecture';
 
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.querySelector('body');
-  const isLecturePage = page.classList.contains('lecture-page');
+  const isLecturePage = page.classList.contains('lecture');
 
   if (isLecturePage) {
     console.log('lecturepage');
