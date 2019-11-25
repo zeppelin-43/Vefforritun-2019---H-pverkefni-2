@@ -105,7 +105,6 @@ export default class List {
 
       const check = helpers.el('div');
       check.classList.add('lectures__card__done');
-      check.classList.add('lectures__card__check');
 
       const lecturesCardBorder = helpers.el('div', h1, h2, check);
       lecturesCardBorder.classList.add('lectures__card__border');
