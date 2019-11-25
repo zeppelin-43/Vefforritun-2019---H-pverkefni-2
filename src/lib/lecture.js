@@ -170,15 +170,17 @@ export default class Lecture {
         const footer = helpers.el('footer');
         footer.className = 'lecture__footer';
         const slug = lecture.slug;
-        const finish = helpers.el('button');
+        const finish = helpers.el('a');
+        finish.className = 'lecture__footer__finish';
         if(storage.load().includes(slug)) {
-            finish.innerHTML = '✓ Klára fyrirlestur'
-            finish.className = 'lecture__footer__finish--check'
+            finish.innerHTML = '✓ Fyrirlestur kláraður'
+            finish.classList.add('lecture__footer__finish--check')
         }
         else {
             finish.innerHTML = 'Klára fyrirlestur'
-            finish.className = 'lecture__footer__finish';
         }
+        finish.setAttribute('href', '#');
+        finish.setAttribute('onclick', 'return false');
         finish.addEventListener('click', this.finishLecture);
         const back = helpers.el('a', 'Til baka');
         back.className = 'lecture__footer__back';
@@ -204,13 +206,9 @@ export default class Lecture {
             const slug = (new URLSearchParams(window.location.search)).get('slug');
             
             //const finish = document.querySelector('.lecture__footer__finish');
-            if(!storage.load().includes(slug)) {
-                e.target.innerHTML='✓ Klára fyrirlestur';
-                e.target.className = 'lecture__footer__finish--check';
-            }
-            else {
-                e.target.innerHTML='Klára fyrirlestur';
-            }
+          
+            e.target.innerHTML='✓ Fyrirlestur kláraður';
+            e.target.classList.add('lecture__footer__finish--check');
             storage.save(slug);
 
         }
