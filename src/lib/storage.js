@@ -9,7 +9,7 @@ export function load() {
     if (finished === null) {
         return [];
     }
-    return JSON.parse(favourites);
+    return JSON.parse(finished);
 }
 
 /**
