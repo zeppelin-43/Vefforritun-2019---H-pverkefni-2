@@ -8,21 +8,16 @@ export default class List {
     this.URL = 'lectures.json';
   }
 
-  init() {
-    // EVENTLISTERNER á filter takka
-  }
-
   load() {
     helpers.empty(this.container);
-
     this.eventlistenerOnButton();
     this.update();
-    // Tékka hvað á að birta og hvernig, hvaða filterar
   }
 
 
   /**
-   * Fall sem sækir fyrirlestrana.
+   * Fall sem sækir fyrirlestrana og kallar á viðeigandi föll
+   * til að filtera og birta fileraðan lista af fyrirlestrum
    */
   update() {
     fetch(this.URL)
@@ -33,12 +28,11 @@ export default class List {
         throw new Error('Villa við að sækja gögn');
       })
       .then((data) => {
-        let lectures = data.lectures;
+        let { lectures } = data;
         lectures = this.filterLectures(lectures);
         this.displayLectures(lectures);
       })
       .catch((error) => {
-        //displayError('Villa!');
         console.error(error); /* eslint-disable-line */
       });
   }
@@ -54,12 +48,19 @@ export default class List {
   /* --------------------------------- */
 
 
+  /**
+   * Setur eventlisteners a filter takkana.
+   */
   eventlistenerOnButton() {
     for (const button of this.filters) { /* eslint-disable-line */
       button.addEventListener('click', this.active.bind(this));
     }
   }
 
+  /**
+    * Filterar lectures útfrá því hvaða filter takkar eru active.
+    * Skilar filteraðum lista, ef ekkert filterað þá skilar hann lectures til baka.
+    */
   filterLectures(lectures) {
     const filteredLectures = [];
     for (const button of this.filters) { /* eslint-disable-line */
@@ -77,12 +78,13 @@ export default class List {
     return filteredLectures;
   }
 
-
+  /**
+    * Birtir lectures í lectures__row.
+    */
   displayLectures(lectures) {
     for (const lecture of lectures) { /* eslint-disable-line */
       const h1 = helpers.el('h1');
       h1.classList.add('lectures__card__category');
-      h1.classList.add('lectures__card__text');
       switch (lecture.category) {
         case 'javascript':
           h1.innerText = 'JavaScript';
@@ -99,14 +101,13 @@ export default class List {
 
       const h2 = helpers.el('h2');
       h2.classList.add('lectures__card__title');
-      h2.classList.add('lectures__card__text');
       h2.innerText = lecture.title;
 
+      const lecturesCardText = helpers.el('div', h1, h2);
+      lecturesCardText.classList.add('lectures__card__text');
 
-      const check = helpers.el('div');
-      check.classList.add('lectures__card__done');
 
-      const lecturesCardBorder = helpers.el('div', h1, h2, check);
+      const lecturesCardBorder = helpers.el('div', lecturesCardText);
       lecturesCardBorder.classList.add('lectures__card__border');
 
       const lecturesCard = helpers.el('a', lecturesCardBorder);
@@ -119,8 +120,7 @@ export default class List {
         lecturesCard.appendChild(img);
       }
 
-      /*storage.ifFinished(lecture.slug)*/ 
-      if (true) {
+      if (storage.isFinished(lecture.slug)) {
         const lecturesCardDone = helpers.el('div', '✓');
         lecturesCardDone.classList.add('lectures__card__done');
         lecturesCardBorder.appendChild(lecturesCardDone);
@@ -130,8 +130,5 @@ export default class List {
       lecturesCol.classList.add('lectures__col');
       this.container.appendChild(lecturesCol);
     }
-
   }
-
-
 }
