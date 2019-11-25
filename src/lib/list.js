@@ -1,10 +1,10 @@
-import { empty } from './helpers';
 import * as helpers from './helpers';
+import * as storage from './storage';
 
 export default class List {
   constructor() {
-    this.container = document.querySelector('.list');
-    this.filters = document.querySelectorAll('.filters');
+    this.container = document.querySelector('.lectures__row');
+    this.filters = document.querySelectorAll('.filter__button');
     this.URL = 'lectures.json';
   }
 
@@ -13,7 +13,8 @@ export default class List {
   }
 
   load() {
-    empty(this.container);
+    helpers.empty(this.container);
+
     this.eventlistenerOnButton();
     this.update();
     // Tékka hvað á að birta og hvernig, hvaða filterar
@@ -42,24 +43,29 @@ export default class List {
       });
   }
 
+  /* -----------Event methods------------- */
+
   active(e) {
-    e.target.classList.toggle('button-active');
-    empty(this.container);
+    e.target.classList.toggle('filter--active');
+    helpers.empty(this.container);
     this.update();
   }
 
+  /* --------------------------------- */
+
+
   eventlistenerOnButton() {
-    for (const button of filters.querySelectorAll('.filters__button')) { /* eslint-disable-line */
+    for (const button of this.filters) { /* eslint-disable-line */
       button.addEventListener('click', this.active.bind(this));
     }
   }
 
   filterLectures(lectures) {
     const filteredLectures = [];
-    for (const button of filters.querySelectorAll('.filters__button')) { /* eslint-disable-line */
-      if (button.classList.contains('button-active')) {
+    for (const button of this.filters) { /* eslint-disable-line */
+      if (button.classList.contains('filter--active')) {
         for (const item of lectures) { /* eslint-disable-line */
-          if (item.category === button.id) {
+          if (item.category === button.getAttribute('lecture-category')) {
             filteredLectures.push(item);
           }
         }
@@ -74,19 +80,56 @@ export default class List {
 
   displayLectures(lectures) {
     for (const lecture of lectures) { /* eslint-disable-line */
-      const title = helpers.el('h2');
-      title.innerText = lecture.title;
+      const h1 = helpers.el('h1');
+      h1.classList.add('lectures__card__category');
+      h1.classList.add('lectures__card__text');
+      switch (lecture.category) {
+        case 'javascript':
+          h1.innerText = 'JavaScript';
+          break;
 
-      const category = helpers.el('h3');
-      category.innerText = lecture.category;
+        case 'html':
+          h1.innerText = 'HTML';
+          break;
+
+        default:
+          h1.innerText = 'CSS';
+      }
 
 
-      const img = helpers.el('img');
-      img.src = lecture.thumbnail;
+      const h2 = helpers.el('h2');
+      h2.classList.add('lectures__card__title');
+      h2.classList.add('lectures__card__text');
+      h2.innerText = lecture.title;
 
 
-      const div = helpers.el('div', img, title, category);
-      this.container.appendChild(div);
+      const check = helpers.el('div');
+      check.classList.add('lectures__card__done');
+      check.classList.add('lectures__card__check');
+
+      const lecturesCardBorder = helpers.el('div', h1, h2, check);
+      lecturesCardBorder.classList.add('lectures__card__border');
+
+      const lecturesCard = helpers.el('a', lecturesCardBorder);
+      lecturesCard.classList.add('lectures__card');
+      lecturesCard.setAttribute('href', `fyrirlestur.html?slug=${lecture.slug}`);
+
+      if (lecture.thumbnail) {
+        const img = helpers.el('img');
+        img.src = lecture.thumbnail;
+        lecturesCard.appendChild(img);
+      }
+
+      /*storage.ifFinished(lecture.slug)*/ 
+      if (true) {
+        const lecturesCardDone = helpers.el('div', '✓');
+        lecturesCardDone.classList.add('lectures__card__done');
+        lecturesCardBorder.appendChild(lecturesCardDone);
+      }
+
+      const lecturesCol = helpers.el('div', lecturesCard);
+      lecturesCol.classList.add('lectures__col');
+      this.container.appendChild(lecturesCol);
     }
 
   }
