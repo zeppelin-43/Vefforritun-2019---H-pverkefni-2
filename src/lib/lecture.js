@@ -173,12 +173,12 @@ export default class Lecture {
         const finish = helpers.el('button');
         if(storage.load().includes(slug)) {
             finish.innerHTML = '✓ Klára fyrirlestur'
+            finish.className = 'lecture__footer__finish--check'
         }
         else {
             finish.innerHTML = 'Klára fyrirlestur'
+            finish.className = 'lecture__footer__finish';
         }
-
-        finish.className = 'lecture__footer__finish';
         finish.addEventListener('click', this.finishLecture);
         const back = helpers.el('a', 'Til baka');
         back.className = 'lecture__footer__back';
@@ -206,6 +206,7 @@ export default class Lecture {
             //const finish = document.querySelector('.lecture__footer__finish');
             if(!storage.load().includes(slug)) {
                 e.target.innerHTML='✓ Klára fyrirlestur';
+                e.target.className = 'lecture__footer__finish--check';
             }
             else {
                 e.target.innerHTML='Klára fyrirlestur';
