@@ -5,13 +5,12 @@ export default class Lecture {
     constructor() {
         this.body = document.querySelector('.lecture-page');
         this.URL = 'lectures.json';
-        this.SLUG; // Geyma slug-ið í þessu
     }
 
     /**
      * Finnur réttan fyrirlestur miðað við SLUG
      */
-    getLecture() {
+    getLecture(slug) {
         fetch(this.URL)
         .then((response) => {
             if (response.ok) {
@@ -24,7 +23,7 @@ export default class Lecture {
             const lectures = data.lectures;
             var lecture = null;
             for(let i = 0; i<lectures.length; i++) {
-                if(lectures[i].slug === this.SLUG) {
+                if(lectures[i].slug === slug) {
                     console.log('Found the right slug ' + lectures[i].slug);
                     // console.log(lectures[i]);
                     lecture= lectures[i];
@@ -184,22 +183,34 @@ export default class Lecture {
 
 
         finishLecture(e) {
-            //console.log('saving the ' + this.SLUG.bind(this));
-            storage.save((new URLSearchParams(window.location.search)).get('slug'));
+            const slug = (new URLSearchParams(window.location.search)).get('slug');
+            
+            //const finish = document.querySelector('.lecture__footer__finish');
+            if(!storage.load().includes(slug)) {
+                e.target.innerHTML='✓ Klára fyrirlestur';
+            }
+            else {
+                e.target.innerHTML='Klára fyrirlestur';
+            }
+            storage.save(slug);
+
         }
 
     load() {
         console.log('load me');
         // Sækir slug úr browser urli
-        // this.SLUG = url;
+        // slug = url;
         // Sækir viðeigandi gögn úr .json skránni
         // Kallar á fleiri föll sem sjá um að birta
-        this.SLUG = (new URLSearchParams(window.location.search)).get('slug'); // Sækja sluggið
-        console.log(this.SLUG);
+        const slug = (new URLSearchParams(window.location.search)).get('slug'); // Sækja sluggið
+        console.log(slug);
 
         const finish = document.querySelector('.lecture__footer__finish');
         finish.addEventListener('click', this.finishLecture);
-        this.getLecture();
+        if(storage.load().includes(slug)) {
+            finish.innerHTML='✓ Klára fyrirlestur';
+        }
+        this.getLecture(slug);
         // debugger;
        
     
