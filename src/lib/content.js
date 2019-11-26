@@ -76,6 +76,7 @@ export function list(object) {
 
 export function code(object) {
   const pre = helpers.el('pre', object.data);
+  pre.className = 'lecture__code';
   const c = helpers.el('code', pre);
   return c;
 }
