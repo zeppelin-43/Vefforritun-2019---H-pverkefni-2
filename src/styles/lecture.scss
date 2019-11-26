@@ -30,6 +30,7 @@
     &__heading {
         font-family: $font-heading;
         margin-bottom: $gutter;
+        font-size: 2rem;
     }
 
     &__youtube {
@@ -61,16 +62,12 @@
 
     &__image {
         margin-bottom: 2*$gutter;
-
-        &__caption {
-            font-style: italic;
-        }
     }
 
     &__quote {
         background-color: $color-4;
         padding: $gutter;
-        margin-bottom: 3*$gutter;
+        margin-bottom: 2*$gutter;
         margin-right: -$gutter;
         margin-left: -$gutter;
 
