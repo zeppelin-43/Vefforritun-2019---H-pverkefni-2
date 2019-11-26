@@ -46,6 +46,7 @@ export function image(object) {
   const img = helpers.el('img');
   const caption = helpers.el('p');
   caption.className = 'lecture__image__caption';
+  caption.innerHTML = object.caption;
 
   img.setAttribute('src', object.data);
   lectureImage.appendChild(img);
