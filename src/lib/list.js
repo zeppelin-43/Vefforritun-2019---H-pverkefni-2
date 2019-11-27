@@ -117,6 +117,7 @@ export default class List {
       if (lecture.thumbnail) {
         const img = helpers.el('img');
         img.src = lecture.thumbnail;
+        img.alt = lecture.title;
         lecturesCard.appendChild(img);
       }
 
