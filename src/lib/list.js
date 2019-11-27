@@ -66,7 +66,7 @@ export default class List {
     for (const button of this.filters) { /* eslint-disable-line */
       if (button.classList.contains('filter--active')) {
         for (const item of lectures) { /* eslint-disable-line */
-          if (item.category === button.getAttribute('lecture-category')) {
+          if (item.category === button.getAttribute('data-category')) {
             filteredLectures.push(item);
           }
         }
