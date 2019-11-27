@@ -49,6 +49,7 @@ export function image(object) {
   caption.innerHTML = object.caption;
 
   img.setAttribute('src', object.data);
+  img.setAttribute('alt', object.caption);
   lectureImage.appendChild(img);
   lectureImage.appendChild(caption);
   return lectureImage;
