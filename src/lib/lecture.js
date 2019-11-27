@@ -118,7 +118,7 @@ export default class Lecture {
     finish.addEventListener('click', this.finishLecture);
     const back = helpers.el('a', 'Til baka');
     back.className = 'lecture__footer__back';
-    back.setAttribute('href', '/');
+    back.setAttribute('href', 'index.html');
     footer.appendChild(finish);
     footer.appendChild(back);
     this.body.appendChild(footer);
