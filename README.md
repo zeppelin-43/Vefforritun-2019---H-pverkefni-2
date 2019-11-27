@@ -1,3 +1,63 @@
+# Leiðbeiningar til að keyra verkefnið
+Til að keyra verkefnið þarf að framkvæma eftirfarandi skipanir af skipanalínu í möppu verkefnisins:
+
+```bash
+npm install
+npm run dev
+```
+
+## Uppsetning
+* src inniheldur möppur sem innihalda .scss skrár (styles) og .js skrár (lib)
+* Myndirnar sem eru notaðar í verkefninu eru geymdar í img möppunni
+* dist inniheldur .css skrána sem verkefnið notar og "böndlaðan" javascript kóða
+
+## HTML skipulag
+### index.html
+* Skjalinu er skipt upp í header og main. main er síðan skipt upp í raðir (rows) og dálka (col) sambærilegt fyrri verkefnum. Hver fyrirlestur er síðan geymdur í korti inn í dálkunum.
+### fyrirlestur.html
+* Skjalinu er skipt upp í header, main og footer. main er skipt upp í eina röð (row) og einn dálk (col) semm inniheldur div fyrir allt efnið í fyrirlestrinum.
+## CSS skipulag
+CSS skjöl verkefnisins eru útfærð með SCSS og síðan þýdd yfir í CSS kóða. SCSS skjölum er skipt niður í ákveðna parta eftir síðum og eigindum:
+* Header (header.scss)
+* Filter takkarnir (filter.scss)
+* lecture, fyrir stakan fyrirlestur(lecture.scss)
+* lectures, fyrir alla fyrirlestrana á forsíðunni (lectures.scss)
+* Config (inniheldur ýmsar breytur sem önnur skjöl nýta) (config.scss)
+
+## JavaScript skipulag
+### index.js
+* Tékkar hvaða síðu er verið að hlaða inn og kallar á viðeigandi föll til að hlaða inn réttum gögnum
+### list.js
+* Klasi fyrir alla fyrirlestrana sem birtir eru á forsíðunni. Klasinn sækir fyrirlestrana og sýnir þá á forsíðunni ásamt því að útbúa til virkni fyrir filter takkana.
+### lecture.js
+* Sambærilegur klasi og list.js nema að hann er fyrir stakan fyrirlestur. Sækir réttan fyrirlestur úr gögnunum miðað við gefið slug
+### content.js
+* Klasi sem sér um að báu til elementin með viðeigandi gögnum sem setja á í fyrirlestur.html. Þessa virkni var ekki hægt að hafa í switch setningunni í lecture.js vegna eslint svo við færðum ábyrgðina yfir í sér skrá.
+### storage.js
+* Sér um að setja og ná í gögn úr localstorage, sambærilegt fyrri heimaverkefnum.
+### helpers.js
+* Hjálparföll sem aðrir klasar nýta sér
+
+
+## Linterar
+* Til að keyra eslint
+```bash
+npm run eslint
+```
+* Til að keyra stylelint
+```bash
+npm run stylelint
+```
+
+## Höfundar
+* Daníel Þór Guðmundsson, dthg7@hi.is
+* Agnar Pétursson, agp11@hi.is
+* Anna Kristín Hálfdánardóttir, akh30@hi.is
+
+
+# Verkefnalýsing sem gefin var
+
+
 # Hópverkefni 2
 
 Verkefnið felst í því að smíða prótótýpu af fyrirlestravef fyrir vefforritun. Gefin eru gögn sem unnin eru uppúr námsefni vetrarins.
